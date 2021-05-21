@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React  from 'react';
 import Navbar from './Navbar';
 import MovieCard from './MovieCard';
 import { data } from '../data';
-import { addMovies, addFavourite, setShowFavourites } from '../actions';
+import { addMovies,  setShowFavourites } from '../actions';
 
 class App extends React.Component {
 
@@ -18,8 +18,8 @@ class App extends React.Component {
   }
 
   isMovieFavourite = (movie) => {
-      const { favourites } = this.props.store.getState();
-      const index = favourites.indexOf(movie);
+      const { movies } = this.props.store.getState();
+      const index = movies.favourites.indexOf(movie);
 
       if(index !== -1){
         return true; // found the moviee
@@ -32,7 +32,8 @@ class App extends React.Component {
   }
 
   render(){
-    const { list , favourites, showFavourites } = this.props.store.getState();
+    const { movies } = this.props.store.getState(); // { movies:{} , search:{} }
+    const { list , favourites, showFavourites } = movies; 
 
     const displayMovies = showFavourites ? favourites : list;
     return (
